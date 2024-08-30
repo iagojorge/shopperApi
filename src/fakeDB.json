@@ -1,0 +1,35 @@
+[
+  {
+    "measure_uuid": "uuid-1",
+    "confirmed_value": "1234",
+    "datetime": "2024-08-30T10:30:00Z",
+    "leitura": "1234",
+    "customer_code": "ABC123",
+    "measure_type": "WATER",
+    "confirmed": true
+  },
+  {
+    "measure_uuid": "uuid-2",
+    "confirmed_value": false,
+    "datetime": "2024-08-30T11:00:00Z",
+    "leitura": "5678",
+    "customer_code": "ABC123",
+    "measure_type": "GAS"
+  },
+  {
+    "measure_uuid": "uuid-3",
+    "confirmed_value": false,
+    "datetime": "2024-08-30T11:30:00Z",
+    "leitura": "91011",
+    "customer_code": "XYZ456",
+    "measure_type": "WATER"
+  },
+  {
+    "measure_uuid": "uuid-4",
+    "confirmed_value": false,
+    "datetime": "2024-08-30T12:00:00Z",
+    "leitura": "1213",
+    "customer_code": "XYZ456",
+    "measure_type": "GAS"
+  }
+]

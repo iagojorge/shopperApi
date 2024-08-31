@@ -1,23 +1,40 @@
-import fs from 'fs';
-import path from 'path';
+import { AppDataSource } from "../../infra/db/data-source";
+import { Customer } from "../../infra/entity/customer";
+import { Measure } from "../../infra/entity/measure";
 
+export async function listLeituraByCustomer(
+  customerCode: string,
+  measureType?: string
+) {
+  const customer = await AppDataSource.getRepository(Customer).findOne({
+    where: { customerCode },
+    relations: ["measures"],
+  });
 
-function readData() {
-  const filePath = path.resolve(__dirname, '../../fakeDB.json');
-  const data = fs.readFileSync(filePath, 'utf8');
-  return JSON.parse(data);
-}
-
-
-export function listLeituraByCustomer(customerCode:string, measureType:string) {
-  const data = readData();
-  
-  let filteredData = data.filter((item: { customer_code: string; }) => item.customer_code === customerCode);
-  
-  if (measureType) {
-    const measureTypeUpper = measureType.toUpperCase();
-    filteredData = filteredData.filter((item: { measure_type: string; }) => item.measure_type.toUpperCase() === measureTypeUpper);
+  if (!customer) {
+    return {
+      customer_code: customerCode,
+      measures: [],
+    };
   }
-  
-  return filteredData;
+
+  let leituras = customer.measures;
+  if (measureType) {
+    leituras = leituras?.filter(
+      (measure) => measure.measureType.toUpperCase() === measureType
+    );
+  }
+
+  const formattedLeituras = leituras?.map((measure) => ({
+    measure_uuid: measure.id,
+    measure_datetime: measure.measureDatetime,
+    measure_type: measure.measureType,
+    has_confirmed: measure.hasConfirmed,
+    image_url: measure.image,
+  }));
+
+  return {
+    customer_code: customer.customerCode,
+    measures: formattedLeituras,
+  };
 }

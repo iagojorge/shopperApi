@@ -1,13 +1,16 @@
-import { GoogleGenerativeAI, Part } from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import * as dotenv from "dotenv";
+
+dotenv.config(); 
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
 
-export async function getHidometro(data: string | Part) {
+export async function getHidometro(data: any) {
   try {
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    const prompt = "Descreva o número que é mostrado no display do medidor";
+    const prompt = "Descreva o apenas o número que é mostrado no display do medidor";
 
     const generatedContent = await model.generateContent([prompt, data]);
 

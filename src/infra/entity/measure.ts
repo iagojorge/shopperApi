@@ -12,12 +12,15 @@ export class Measure {
   @CreateDateColumn({ type: 'timestamp with time zone' })
   measureDatetime!: Date;
 
-  @Column({ type: 'text' })
-  image!: string;
-
   @Column({ type: 'boolean', default: false })
   hasConfirmed!: boolean;
-
+  
+  @Column({ type: 'integer' })
+  measureValue!: number;
+  
   @ManyToOne(() => Customer, customer => customer.measures)
   customer!: Customer;
+  
+  @Column({ type: 'text' })
+  image!: string;
 }

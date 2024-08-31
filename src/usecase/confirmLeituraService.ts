@@ -1,9 +1,19 @@
 import { AppDataSource } from "../infra/db/data-source";
 import { Measure } from "../infra/entity/measure";
 
+enum ErrorMessage{
+  INVALID_DATA = "O measure_uuid e confirmed_value são obrigatórios.",
+  MEASURE_NOT_FOUND = "Leitura não encontrada.",
+  CONFIRMATION_DUPLICATE = "Leitura do mês já realizada.",
+}
+
+interface MeasureRequest {
+  measure_uuid: string,
+  confirmed_value: number
+}
 
 export async function confirmLeituraService(req: any, res: any) {
-  const { measure_uuid, confirmed_value } = req.body;
+  const { measure_uuid, confirmed_value }= req.body as MeasureRequest;
 
   if (!measure_uuid || confirmed_value === undefined) {
     return res.status(400).json({
@@ -28,14 +38,6 @@ export async function confirmLeituraService(req: any, res: any) {
       return res.status(409).json({
         error_code: "CONFIRMATION_DUPLICATE",
         error_description: "Leitura do mês já realizada.",
-      });
-    }
-
-    if (parseInt(confirmed_value, 10) !== measure.measureValue) {
-      return res.status(400).json({
-        error_code: "INVALID_DATA",
-        error_description:
-          "O valor confirmado não corresponde ao valor da medida.",
       });
     }
 

@@ -1,7 +1,8 @@
-import { AppDataSource } from "../../infra/db/data-source";
-import { Measure } from "../../infra/entity/measure";
+import { AppDataSource } from "../infra/db/data-source";
+import { Measure } from "../infra/entity/measure";
 
-export async function confirmLeitura(req: any, res: any) {
+
+export async function confirmLeituraService(req: any, res: any) {
   const { measure_uuid, confirmed_value } = req.body;
 
   if (!measure_uuid || confirmed_value === undefined) {

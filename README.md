@@ -1,5 +1,5 @@
 
-# ShopperApi
+# Desafio Shopper
 
 **ShopperApi** é uma API desenvolvida para gerenciar medições e uploads de dados dos clientes. A API oferece três endpoints principais para confirmar medições, fazer o upload de imagens e listar dados de clientes específicos.
 

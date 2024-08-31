@@ -23,6 +23,7 @@ export async function confirmLeituraService(req: any, res: any, next: any) {
       return next(createError("CONFIRMATION_DUPLICATE"))
     }
 
+    measure.measureValue = confirmed_value;
     measure.hasConfirmed = true;
     await AppDataSource.getRepository(Measure).save(measure);
 

@@ -13,8 +13,8 @@ Este endpoint é utilizado para confirmar o valor de uma medição.
 - **Request Body:**
   ```json
   {
-    "measure_uuid": "",
-    "confirmed_value": ""
+    "measure_uuid": "string",
+    "confirmed_value": "number"
   }
   ```
 
